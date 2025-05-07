@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scroll-Triggered Hamburger Navbar</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      :root {
+        --primary-color: #ffffff;
+        --secondary-color: #222222;
+        --accent-color: #4e6bff;
+      }
+
+      .dark-mode {
+        --primary-color: #222222;
+        --secondary-color: #ffffff;
+      }
+
+      body {
+        background-color: var(--primary-color);
+        color: var(--secondary-color);
+        transition: all 0.3s ease;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        background-color: var(--primary-color);
+        position: fixed;
+        width: 100%;
+        top: 0; /* Changed from -100px to 0 */
+        z-index: 1000;
+        transition: top 0.4s ease;
+      }
+
+      .navbar.hidden {
+        top: -100px !important; /* Moved negative position to class */
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+      }
+
+      .logo img {
+        height: 40px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 30px;
+      }
+
+      .nav-links a {
+        color: var(--secondary-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: var(--accent-color);
+      }
+
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .dark-mode-toggle {
+        width: 50px;
+        height: 25px;
+        background: #ddd;
+        border-radius: 25px;
+        position: relative;
+        cursor: pointer;
+      }
+
+      .toggle-btn {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 21px;
+        height: 21px;
+        border-radius: 50%;
+        background: white;
+        transition: all 0.3s;
+      }
+
+      .dark-mode .toggle-btn {
+        left: calc(100% - 23px);
+      }
+
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        font-size: 24px;
+        color: var(--secondary-color);
+      }
+
+      .mobile-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 250px;
+        height: 100vh;
+        background: var(--primary-color);
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+        padding-top: 20px;
+        transition: right 0.3s ease;
+        z-index: 999;
+      }
+
+      .mobile-nav.active {
+        right: 0;
+      }
+
+      .mobile-header {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        gap: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .mobile-nav a {
+        display: block;
+        padding: 15px 25px;
+        color: var(--secondary-color);
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .floating-hamburger {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        cursor: pointer;
+        font-size: 24px;
+        color: var(--secondary-color);
+        z-index: 998;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .floating-hamburger.visible {
+        opacity: 1;
+      }
+
+      .content {
+        padding: 150px 50px;
+        height: 200vh;
+      }
+
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 15px 20px;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .hamburger {
+          display: block;
+        }
+
+        .mobile-nav {
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="https://via.placeholder.com/40" alt="Logo" />
+        <span>WebLogo</span>
+      </div>
+
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+        <a href="#">About</a>
+        <a href="#">Login</a>
+      </div>
+
+      <div class="nav-right">
+        <div class="dark-mode-toggle">
+          <div class="toggle-btn"></div>
+        </div>
+        <div class="hamburger">☰</div>
+      </div>
+    </nav>
+
+    <div class="floating-hamburger">☰</div>
+
+    <div class="mobile-nav">
+      <div class="mobile-header">
+        <img src="https://via.placeholder.com/40" alt="Logo" />
+        <span>WebLogo</span>
+      </div>
+      <a href="#">Home</a>
+      <a href="#">Services</a>
+      <a href="#">Contact</a>
+      <a href="#">About</a>
+      <a href="#">Login</a>
+    </div>
+
+    <div class="content">
+      <h1>Scroll Down to See Floating Hamburger</h1>
+      <p>Your page content goes here...</p>
+    </div>
+
+    <script>
+      // Dark Mode Toggle
+      const darkModeToggle = document.querySelector(".dark-mode-toggle");
+      const toggleBtn = document.querySelector(".toggle-btn");
+      const body = document.body;
+
+      darkModeToggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+        localStorage.setItem("darkMode", body.classList.contains("dark-mode"));
+      });
+
+      // Check for saved preference
+      if (localStorage.getItem("darkMode") === "true") {
+        body.classList.add("dark-mode");
+      }
+
+      // Mobile Menu Elements
+      const hamburger = document.querySelector(".hamburger");
+      const floatingHamburger = document.querySelector(".floating-hamburger");
+      const mobileNav = document.querySelector(".mobile-nav");
+      const navbar = document.querySelector(".navbar");
+      let lastScroll = window.pageYOffset;
+
+      // Toggle mobile menu
+      const toggleMenu = () => {
+        mobileNav.classList.toggle("active");
+      };
+
+      hamburger.addEventListener("click", toggleMenu);
+      floatingHamburger.addEventListener("click", toggleMenu);
+
+      // Scroll detection for hamburger
+      window.addEventListener("scroll", () => {
+        const currentScroll = window.pageYOffset;
+
+        if (currentScroll > 100 && currentScroll > lastScroll) {
+          floatingHamburger.classList.add("visible");
+          navbar.classList.add("hidden");
+        } else if (currentScroll <= 100) {
+          floatingHamburger.classList.remove("visible");
+          navbar.classList.remove("hidden");
+        }
+
+        lastScroll = currentScroll;
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (
+          !e.target.closest(".nav-right") &&
+          !e.target.closest(".mobile-nav") &&
+          !e.target.closest(".floating-hamburger")
+        ) {
+          mobileNav.classList.remove("active");
+        }
+      });
+    </script>
+  </body>
+</html>

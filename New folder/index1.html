@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Royal Team</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap");
+
+      body {
+        margin: 0;
+        font-family: "Orbitron", sans-serif;
+        background: radial-gradient(circle at top left, #000428, #004e92);
+        color: #fff;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      #particles-js {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        top: 0;
+        left: 0;
+      }
+
+      .team-section {
+        position: relative;
+        z-index: 1;
+        padding: 100px 0;
+      }
+
+      .team-title {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .team-title h2 {
+        font-size: 3rem;
+        font-weight: 700;
+        color: #00c6ff;
+        text-shadow: 0 0 20px #00c6ff;
+      }
+
+      .team-card {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 20px;
+        overflow: hidden;
+        backdrop-filter: blur(15px);
+        border: 2px solid transparent;
+        box-shadow: 0 0 20px rgba(0, 198, 255, 0.3);
+        transition: transform 0.4s ease, box-shadow 0.4s ease, border 0.4s;
+        position: relative;
+      }
+
+      .team-card:hover {
+        transform: translateY(-12px) scale(1.03);
+        box-shadow: 0 0 40px rgba(0, 198, 255, 0.8);
+        border: 2px solid #00c6ff;
+      }
+
+      .team-card img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-bottom: 2px solid #00c6ff;
+      }
+
+      .card-body {
+        text-align: center;
+        padding-top: 25px;
+      }
+
+      .card-body h5 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #fff;
+      }
+      #rahul-text {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #fff;
+      }
+
+      .role-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        background: linear-gradient(45deg, #00c6ff, #0072ff);
+        color: white;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+        box-shadow: 0 0 10px #00c6ff;
+      }
+
+      .social-icons a {
+        color: #00c6ff;
+        margin: 0 10px;
+        font-size: 1.3rem;
+        transition: transform 0.3s ease, color 0.3s ease;
+        display: inline-block;
+      }
+
+      .social-icons a:hover {
+        color: #ffffff;
+        text-shadow: 0 0 10px #00c6ff;
+        transform: translateY(-5px);
+      }
+
+      @media (max-width: 576px) {
+        .team-title h2 {
+          font-size: 2rem;
+        }
+
+        .team-card img {
+          height: 220px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Particle Background -->
+    <div id="particles-js"></div>
+
+    <!-- Team Section -->
+    <section class="team-section">
+      <div class="container">
+        <div class="team-title" data-aos="zoom-in">
+          <h2>🌟 OUR TEAM</h2>
+        </div>
+        <div class="row g-4 justify-content-center">
+          <!-- Member 1 -->
+          <div
+            class="col-md-6 col-lg-3"
+            data-aos="fade-up"
+            data-aos-delay="100"
+          >
+            <div class="team-card" data-tilt>
+              <img src="Shubham.jpg" alt="Team Member" />
+              <div class="card-body">
+                <span class="role-badge">FIREBASE MANAGER</span>
+                <h5>SHUBHAM KUMAR</h5>
+                <div class="social-icons">
+                  <a
+                    href="https://www.linkedin.com/in/shubham-kumar-05505530b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                    target="_blank"
+                    ><i class="fab fa-linkedin"></i
+                  ></a>
+                  <a href="https://github.com/shubhamkumar729" target="_blank"
+                    ><i class="fab fa-github"></i
+                  ></a>
+                  <a
+                    href="https://x.com/Shubham19082510?t=o5D29jZVqUoX-JaUtwEGMA&s=09"
+                    target="_blank"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Member 2 -->
+          <div
+            class="col-md-6 col-lg-3"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <div class="team-card" data-tilt>
+              <img src="Rahul.jpg" alt="Team Member" />
+              <div class="card-body">
+                <span class="role-badge">Product Designer</span>
+                <h5 id="rahul-text">RAHUL KUMAR GOSWAMI</h5>
+                <div class="social-icons">
+                  <a
+                    href="https://www.linkedin.com/in/rahul-goswami-a6a243311?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                    target="_blank"
+                    ><i class="fab fa-linkedin"></i
+                  ></a>
+                  <a
+                    href="https://github.com/Rahul-kumar-goswami"
+                    target="_blank"
+                    ><i class="fab fa-github"></i
+                  ></a>
+                  <a href="https://twitter.com" target="_blank">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Member 3 -->
+          <div
+            class="col-md-6 col-lg-3"
+            data-aos="fade-up"
+            data-aos-delay="300"
+          >
+            <div class="team-card" data-tilt>
+              <img src="Swayam.jpg" alt="Team Member" />
+              <div class="card-body">
+                <span class="role-badge">Lead Developer</span>
+                <h5>SWAYAM NANDA</h5>
+                <div class="social-icons">
+                  <a
+                    href="https://www.linkedin.com/in/swayam-nanda-676b02285?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                    target="_blank"
+                    ><i class="fab fa-linkedin"></i
+                  ></a>
+                  <a href="https://github.com/Swayam-Nanda" target="_blank"
+                    ><i class="fab fa-github"></i
+                  ></a>
+                  <a
+                    href="https://x.com/SWAYAM_NANDA_?t=gGO3nhLdLcF2Y_0a9jZd3w&s=09"
+                    target="_blank"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Member 4 -->
+          <div
+            class="col-md-6 col-lg-3"
+            data-aos="fade-up"
+            data-aos-delay="400"
+          >
+            <div class="team-card" data-tilt>
+              <img src="Kunal.jpg" alt="Team Member" />
+              <div class="card-body">
+                <span class="role-badge">Marketing Head</span>
+                <h5>KUNAL TIWARY</h5>
+                <div class="social-icons">
+                  <a
+                    href="https://www.linkedin.com/in/kunal-tiwary-798240295?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                    target="_blank"
+                    ><i class="fab fa-linkedin"></i
+                  ></a>
+                  <a href="https://github.com/kunaltiwary18" target="_blank"
+                    ><i class="fab fa-github"></i
+                  ></a>
+                  <a
+                    href="https://www.instagram.com/kunaltiwary18?utm_source=qr&igsh=MXQyMDA1Yzl0MXI1dg=="
+                    target="_blank"
+                    ><i class="fab fa-instagram"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
+
+    <script>
+      AOS.init({
+        duration: 1000,
+        once: true,
+      });
+
+      particlesJS("particles-js", {
+        particles: {
+          number: { value: 60 },
+          color: { value: "#00c6ff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.3 },
+          size: { value: 4 },
+          move: { speed: 1.5 },
+        },
+      });
+
+      VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+        max: 15,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.3,
+      });
+    </script>
+  </body>
+</html>

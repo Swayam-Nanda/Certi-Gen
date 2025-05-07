@@ -1,0 +1,51 @@
+/* Root Variables for Colors and Fonts */
+:root {
+    /* Colors */
+    --background: #f9fafb; /* Light background for the website */
+    --primary: #2563eb; /* Modern Blue */
+    --secondary: #e5e7eb; /* Cool Light Gray */
+    --text-color: #111827; /* Charcoal Black */
+    --accent: #3b82f6; /* Saturated Blue */
+    --success: #10b981; /* Mint Green */
+    --error: #ef4444; /* Friendly Red */
+    --icon-color: rgb(130, 161, 255);
+  
+    /* Fonts */
+    --heading-font: "Poppins", sans-serif;
+    --body-font: "Inter", sans-serif;
+    --accent-font: "Playfair Display", serif;
+  }
+  
+  .darkmode {
+    /* Dark Mode Colors */
+    --background: #0f172a; /* Dark Navy Blue */
+    --primary: #1e293b; /* Charcoal */
+    --secondary: #334155; /* Slightly lighter Charcoal */
+    --text-color: #f1f5f9; /* Pale White-Blue */
+    --accent: #38bdf8; /* Bright Sky Blue */
+    --success: #22c55e; /* Vibrant Green */
+    --error: #f87171; /* Desaturated Red */
+    --icon-color: rgb(238, 242, 255);
+  
+    /* Fonts */
+    --heading-font: "Poppins", sans-serif;
+    --body-font: "Inter", sans-serif;
+    --accent-font: "Playfair Display", serif;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Poppins", sans-serif; /* Headings stay in Poppins */
+  }
+  
