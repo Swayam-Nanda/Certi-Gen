@@ -41,7 +41,11 @@
         </div>
         <!-- Notification icon, hidden when not logged in -->
         <div class="notif-container" id="notif-container">
-          <button class="notif-btn" aria-label="Messages/Notifications">
+          <a
+            href="/HTML/Notifications.html"
+            class="notif-btn"
+            aria-label="Messages/Notifications"
+          >
             <!-- Bell SVG icon -->
             <svg
               width="24"
@@ -56,7 +60,7 @@
               <path d="M18 8a6 6 0 10-12 0c0 7-3 9-3 9h18s-3-2-3-9" />
               <path d="M13.73 21a2 2 0 01-3.46 0" />
             </svg>
-          </button>
+          </a>
         </div>
         <!-- User icon container, hidden initially -->
         <div id="user-container" style="display: none; position: relative">
@@ -76,8 +80,9 @@
             role="menu"
             aria-label="User menu"
           >
-            <a href="#" role="menuitem" tabindex="0">Profile</a>
-            <a href="#" role="menuitem" tabindex="0">Settings</a>
+            <a href="/HTML/Profile.html" role="menuitem" tabindex="0"
+              >Profile</a
+            >
             <button id="logout-btn" role="menuitem" tabindex="0">Logout</button>
           </div>
         </div>

@@ -12,12 +12,21 @@
       rel="stylesheet"
     />
   </head>
-  <body class="darkmode">
-    <!-- Navigation code here - same as other pages -->
-
+  <body>
     <div class="services-wrapper">
-      <!-- Search Bar -->
-      <div class="search-container">
+      <!-- Top Bar: Back Button + Search Bar -->
+      <div class="topbar">
+        <a href="/HTML/Home.html" class="back-btn" aria-label="Back to Home">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M15 19l-7-7 7-7"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
         <div class="search-box">
           <svg class="search-icon" viewBox="0 0 24 24">
             <path
@@ -30,6 +39,35 @@
             placeholder="Search thousands of templates"
           />
           <button class="create-btn">Create a design</button>
+        </div>
+        <div
+          class="floating-hamburger visible"
+          tabindex="0"
+          aria-label="Open Menu"
+        >
+          ☰
+        </div>
+        <div class="mobile-nav">
+          <div class="mobile-header">
+            <div class="logo" tabindex="0">
+              <img
+                src="/Media/logo-light.png"
+                alt="Logo Light"
+                class="logo-img light-mode"
+              />
+              <img
+                src="/Media/logo-dark.png"
+                alt="Logo Dark"
+                class="logo-img dark-mode"
+              />
+              <span class="site-name-mobile">CERTI-GEN</span>
+            </div>
+          </div>
+          <a href="/HTML/Home.html">Home</a>
+          <a href="/HTML/Services.html">Services</a>
+          <a href="/HTML/Contact.html">Contact</a>
+          <a href="/HTML/About.html">About</a>
+          <a href="/HTML/Login.html">Login</a>
         </div>
       </div>
 
@@ -57,16 +95,21 @@
             Design professional certificates for any occasion with our
             easy-to-use templates and tools.
           </p>
-          <button class="start-btn">Start Designing</button>
+          <button
+            class="start-btn"
+            onclick="window.location.href='/HTML/Editor.html'"
+          >
+            Start Designing
+          </button>
         </div>
         <div class="banner-images">
           <img
-            src="/Media/featured-cert-1.jpg"
+            src="/Media/featured-cert-2.png"
             alt="Featured Certificate"
             class="featured-img"
           />
           <img
-            src="/Media/featured-cert-2.jpg"
+            src="/Media/featured-cert-1.png"
             alt="Featured Certificate"
             class="featured-img"
           />
@@ -78,30 +121,30 @@
         <h2>Browse by category</h2>
         <div class="category-cards">
           <div class="category-card" data-category="academic">
-            <img src="/Media/academic-thumb.jpg" alt="Academic Certificates" />
+            <img src="/Media/academic-thumb.png" alt="Academic Certificates" />
             <span>Academic</span>
           </div>
           <div class="category-card" data-category="professional">
             <img
-              src="/Media/professional-thumb.jpg"
+              src="/Media/professional-thumb.png"
               alt="Professional Certificates"
             />
             <span>Professional</span>
           </div>
           <div class="category-card" data-category="event">
-            <img src="/Media/event-thumb.jpg" alt="Event Certificates" />
+            <img src="/Media/event-thumb.png" alt="Event Certificates" />
             <span>Events</span>
           </div>
           <div class="category-card" data-category="appreciation">
             <img
-              src="/Media/appreciation-thumb.jpg"
+              src="/Media/appreciation-thumb.png"
               alt="Appreciation Certificates"
             />
             <span>Appreciation</span>
           </div>
           <div class="category-card" data-category="achievement">
             <img
-              src="/Media/achievement-thumb.jpg"
+              src="/Media/achievement-thumb.png"
               alt="Achievement Certificates"
             />
             <span>Achievement</span>
@@ -148,10 +191,8 @@
         </div>
       </section>
     </div>
-
     <!-- Include Footer here -->
     <script src="/JS/Services.js"></script>
-    <script src="/JS/Navbar.js"></script>
     <script src="/JS/Global.js"></script>
   </body>
 </html>

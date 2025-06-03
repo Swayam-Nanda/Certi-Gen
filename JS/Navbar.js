@@ -75,11 +75,11 @@ logoutBtn.addEventListener("click", () => {
   userIcon.setAttribute("aria-expanded", "false");
 });
 
-// // Simulate login after 2 seconds
-// setTimeout(() => {
-//   isLoggedIn = true;
-//   updateNavbarForLogin();
-// }, 2000);
+// Simulate login after 2 seconds
+setTimeout(() => {
+  isLoggedIn = true;
+  updateNavbarForLogin();
+}, 2000);
 
 // Mobile Menu Elements
 const hamburger = document.querySelector(".hamburger");

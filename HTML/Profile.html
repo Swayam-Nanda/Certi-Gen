@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/CSS/Global.css" />
+    <link rel="stylesheet" href="/CSS/Profile.css" />
+    <!-- css-doodle library -->
+  </head>
+  <body>
+    <!-- Sparkling Lights Background -->
+    <div class="light x1"></div>
+    <div class="light x2"></div>
+    <div class="light x3"></div>
+    <div class="light x4"></div>
+    <div class="light x5"></div>
+    <div class="light x6"></div>
+    <div class="light x7"></div>
+    <div class="light x8"></div>
+    <div class="light x9"></div>
+    <a href="/HTML/Home.html" class="back-btn" aria-label="Back to Home">
+      <svg
+        class="back-icon"
+        width="28"
+        height="28"
+        viewBox="0 0 24 24"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M15 19l-7-7 7-7"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </a>
+    <main class="profile-container">
+      <!-- Profile Picture -->
+      <section class="profile-picture-section">
+        <h2 class="headline">Profile Picture</h2>
+        <div class="avatar-wrapper">
+          <img
+            id="avatarPreview"
+            src="default-avatar.svg"
+            alt="Profile Picture"
+            class="avatar"
+          />
+          <input
+            type="file"
+            id="avatarUpload"
+            accept="image/*"
+            class="avatar-upload"
+            disabled
+          />
+          <button class="btn" id="uploadBtn" disabled>Upload</button>
+        </div>
+      </section>
+
+      <!-- Basic Info -->
+      <section class="profile-section">
+        <h2 class="headline">Basic Info</h2>
+        <form class="profile-form" id="profileForm">
+          <label
+            >Full Name
+            <input
+              type="text"
+              name="fullName"
+              value="John Doe"
+              class="input"
+              readonly
+            />
+          </label>
+          <label
+            >Email Address
+            <input
+              type="email"
+              name="email"
+              value="john@example.com"
+              class="input"
+              readonly
+            />
+          </label>
+          <label
+            >Organization/Institute Name
+            <input
+              type="text"
+              name="organization"
+              value="Example Institute"
+              class="input"
+              readonly
+            />
+          </label>
+          <label
+            >Role/Designation
+            <input
+              type="text"
+              name="role"
+              value="Event Co-ordinator"
+              class="input"
+              readonly
+            />
+          </label>
+          <label
+            >Date Joined
+            <input
+              type="date"
+              name="dateJoined"
+              value="2024-01-15"
+              class="input"
+              disabled
+            />
+          </label>
+          <div class="profile-form-actions">
+            <button class="btn" type="button" id="editProfileBtn">
+              Edit Profile Info
+            </button>
+            <button
+              class="btn"
+              type="submit"
+              id="saveBtn"
+              style="display: none"
+            >
+              Save Changes
+            </button>
+            <button
+              class="btn"
+              type="button"
+              id="cancelBtn"
+              style="display: none"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Certi-Gen Stats -->
+      <section class="stats-dashboard">
+        <h2 class="headline">Certi-Gen Stats</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-number">128</span>
+            <span class="stat-label">Certificates Created</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">7</span>
+            <span class="stat-label">Bulk Generations</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">5</span>
+            <span class="stat-label">Templates Used</span>
+          </div>
+          <div class="stat-card">
+            <span
+              class="stat-number"
+              style="font-size: 1.7rem; padding-bottom: 10px"
+              >2025-05-28</span
+            >
+            <span class="stat-label">Last Generation</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Saved Templates -->
+      <section class="templates-section">
+        <h2 class="headline">Saved Templates</h2>
+        <div class="templates-gallery">
+          <div class="template-thumb">
+            <img src="template1.png" alt="Template 1" />
+          </div>
+          <div class="template-thumb">
+            <img src="template2.png" alt="Template 2" />
+          </div>
+          <!-- More thumbnails as needed -->
+        </div>
+      </section>
+
+      <!-- Account Settings -->
+      <section class="account-settings">
+        <h2 class="headline">Account Settings</h2>
+        <div class="settings-actions">
+          <button class="btn">Change Password</button>
+          <button class="btn danger">Delete Account</button>
+        </div>
+      </section>
+    </main>
+    <script>
+      const body = document.body;
+      if (localStorage.getItem("darkMode") === "true") {
+        body.classList.add("darkmode");
+      }
+      // Profile Picture Upload Preview
+      const avatarUpload = document.getElementById("avatarUpload");
+      const avatarPreview = document.getElementById("avatarPreview");
+      const uploadBtn = document.getElementById("uploadBtn");
+
+      avatarUpload.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            avatarPreview.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Edit/Save/Cancel Profile Info Logic
+      const editBtn = document.getElementById("editProfileBtn");
+      const saveBtn = document.getElementById("saveBtn");
+      const cancelBtn = document.getElementById("cancelBtn");
+      const profileForm = document.getElementById("profileForm");
+      const inputs = profileForm.querySelectorAll(
+        'input:not([name="dateJoined"])'
+      );
+
+      let editing = false;
+      let originalValues = {};
+
+      editBtn.addEventListener("click", function () {
+        if (!editing) {
+          // Store original values for cancel
+          inputs.forEach((input) => {
+            originalValues[input.name] = input.value;
+            input.removeAttribute("readonly");
+          });
+          avatarUpload.removeAttribute("disabled");
+          uploadBtn.removeAttribute("disabled");
+          saveBtn.style.display = "inline-block";
+          cancelBtn.style.display = "inline-block";
+          editBtn.style.display = "none";
+          editing = true;
+        }
+      });
+
+      cancelBtn.addEventListener("click", function () {
+        // Revert changes
+        inputs.forEach((input) => {
+          input.value = originalValues[input.name];
+          input.setAttribute("readonly", true);
+        });
+        avatarUpload.setAttribute("disabled", true);
+        uploadBtn.setAttribute("disabled", true);
+        saveBtn.style.display = "none";
+        cancelBtn.style.display = "none";
+        editBtn.style.display = "inline-block";
+        editing = false;
+      });
+
+      profileForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        // Save logic here (AJAX or local update)
+        inputs.forEach((input) => input.setAttribute("readonly", true));
+        avatarUpload.setAttribute("disabled", true);
+        uploadBtn.setAttribute("disabled", true);
+        saveBtn.style.display = "none";
+        cancelBtn.style.display = "none";
+        editBtn.style.display = "inline-block";
+        editing = false;
+        alert("Profile updated!");
+      });
+
+      // (Optional) Upload button logic
+      uploadBtn.addEventListener("click", function (e) {
+        if (!uploadBtn.disabled) {
+          e.preventDefault();
+          avatarUpload.click();
+        }
+      });
+    </script>
+  </body>
+</html>

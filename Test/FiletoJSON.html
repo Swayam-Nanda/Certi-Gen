@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fabric.js Live Editor with JSON Preview</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f7f7f7;
+      }
+      .container {
+        display: flex;
+        height: 100vh;
+      }
+      .editor-panel {
+        flex: 1;
+        padding: 32px 24px 24px 32px;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        min-width: 400px;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.03);
+      }
+      .json-panel {
+        flex: 1;
+        padding: 32px 32px 24px 24px;
+        background: #222;
+        color: #eee;
+        font-size: 15px;
+        overflow: auto;
+        min-width: 350px;
+        display: flex;
+        flex-direction: column;
+      }
+      .controls {
+        margin-bottom: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+      }
+      .controls label {
+        margin-right: 4px;
+      }
+      .controls input,
+      .controls select {
+        margin-right: 8px;
+      }
+      #canvas-container {
+        border: 1px solid #ddd;
+        background: #fafafa;
+        width: 600px;
+        height: 350px;
+        margin-bottom: 18px;
+      }
+      #json-output {
+        background: #222;
+        color: #eee;
+        border: none;
+        width: 100%;
+        height: 100%;
+        font-family: monospace;
+        font-size: 15px;
+        resize: none;
+        padding: 16px;
+        box-sizing: border-box;
+      }
+      @media (max-width: 900px) {
+        .container {
+          flex-direction: column;
+        }
+        .editor-panel,
+        .json-panel {
+          min-width: 0;
+          width: 100%;
+        }
+        #canvas-container {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Left: Editor -->
+      <div class="editor-panel">
+        <h2>Text Editor</h2>
+        <div class="controls">
+          <button id="addTextBtn">Add Text</button>
+          <label
+            >Font Size:
+            <input type="number" id="fontSize" value="32" min="8" max="200"
+          /></label>
+          <label
+            >Color: <input type="color" id="fontColor" value="#222222"
+          /></label>
+          <label
+            >Font Family:
+            <select id="fontFamily">
+              <option value="Arial">Arial</option>
+              <option value="Courier New">Courier New</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Times New Roman">Times New Roman</option>
+              <option value="Comic Sans MS">Comic Sans MS</option>
+            </select>
+          </label>
+          <button id="boldBtn">Bold</button>
+          <button id="italicBtn">Italic</button>
+          <button id="underlineBtn">Underline</button>
+        </div>
+        <div id="canvas-container">
+          <canvas id="c" width="600" height="350"></canvas>
+        </div>
+      </div>
+      <!-- Right: JSON Output -->
+      <div class="json-panel">
+        <h2>Live Fabric JSON</h2>
+        <textarea id="json-output" readonly></textarea>
+      </div>
+    </div>
+    <script>
+      // Initialize canvas
+      const canvas = new fabric.Canvas("c", { selection: false });
+
+      // Helper: Update JSON output
+      function updateJSON() {
+        document.getElementById("json-output").value = JSON.stringify(
+          canvas.toJSON(),
+          null,
+          2
+        );
+      }
+
+      // Add Text
+      document.getElementById("addTextBtn").onclick = function () {
+        const text = new fabric.IText("Edit me", {
+          left: 100,
+          top: 100,
+          fontSize: parseInt(document.getElementById("fontSize").value),
+          fill: document.getElementById("fontColor").value,
+          fontFamily: document.getElementById("fontFamily").value,
+        });
+        canvas.add(text).setActiveObject(text);
+        canvas.renderAll();
+        updateJSON();
+      };
+
+      // Controls
+      function updateActiveText(prop, value) {
+        const obj = canvas.getActiveObject();
+        if (obj && obj.type === "i-text") {
+          obj.set(prop, value);
+          canvas.renderAll();
+          updateJSON();
+        }
+      }
+
+      document.getElementById("fontSize").oninput = function () {
+        updateActiveText("fontSize", parseInt(this.value));
+      };
+      document.getElementById("fontColor").oninput = function () {
+        updateActiveText("fill", this.value);
+      };
+      document.getElementById("fontFamily").onchange = function () {
+        updateActiveText("fontFamily", this.value);
+      };
+
+      document.getElementById("boldBtn").onclick = function () {
+        const obj = canvas.getActiveObject();
+        if (obj && obj.type === "i-text") {
+          obj.set("fontWeight", obj.fontWeight === "bold" ? "normal" : "bold");
+          canvas.renderAll();
+          updateJSON();
+        }
+      };
+      document.getElementById("italicBtn").onclick = function () {
+        const obj = canvas.getActiveObject();
+        if (obj && obj.type === "i-text") {
+          obj.set(
+            "fontStyle",
+            obj.fontStyle === "italic" ? "normal" : "italic"
+          );
+          canvas.renderAll();
+          updateJSON();
+        }
+      };
+      document.getElementById("underlineBtn").onclick = function () {
+        const obj = canvas.getActiveObject();
+        if (obj && obj.type === "i-text") {
+          obj.set("underline", !obj.underline);
+          canvas.renderAll();
+          updateJSON();
+        }
+      };
+
+      // Update controls when selecting a text
+      canvas.on("selection:created", updateControlsFromActive);
+      canvas.on("selection:updated", updateControlsFromActive);
+
+      function updateControlsFromActive() {
+        const obj = canvas.getActiveObject();
+        if (obj && obj.type === "i-text") {
+          document.getElementById("fontSize").value = obj.fontSize || 32;
+          document.getElementById("fontColor").value = obj.fill || "#222222";
+          document.getElementById("fontFamily").value =
+            obj.fontFamily || "Arial";
+        }
+      }
+
+      // Update JSON on every object change
+      canvas.on("object:modified", updateJSON);
+      canvas.on("object:added", updateJSON);
+      canvas.on("object:removed", updateJSON);
+      canvas.on("text:changed", updateJSON);
+
+      // Initial JSON
+      updateJSON();
+    </script>
+  </body>
+</html>

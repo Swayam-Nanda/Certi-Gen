@@ -30,18 +30,11 @@ body {
   /* background: var(--background); */
   color: var(--text-color);
 }
-.back-button {
+.back-btn {
   position: fixed;
   top: 20px;
   left: 20px;
   z-index: 999;
-}
-
-.back-button .btn {
-  font-weight: bold;
-  border-radius: 30px;
-  padding: 6px 16px;
-  backdrop-filter: blur(10px);
 }
 
 .team-title {

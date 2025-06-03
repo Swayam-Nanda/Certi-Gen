@@ -1,3 +1,28 @@
+const body = document.body;
+if (localStorage.getItem("darkMode") === "true") {
+  body.classList.add("darkmode");
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const hamburger = document.querySelector(".floating-hamburger");
+  const mobileNav = document.querySelector(".mobile-nav");
+
+  hamburger.addEventListener("click", function () {
+    mobileNav.classList.toggle("active");
+  });
+
+  // Optional: close menu when clicking outside
+  document.addEventListener("click", function (e) {
+    if (
+      !mobileNav.contains(e.target) &&
+      !hamburger.contains(e.target) &&
+      mobileNav.classList.contains("active")
+    ) {
+      mobileNav.classList.remove("active");
+    }
+  });
+});
+
 document.addEventListener("DOMContentLoaded", function () {
   // Certificate templates data
   const templates = [
@@ -5,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
       id: 1,
       name: "Academic Excellence",
       category: "academic",
-      image: "/Media/templates/academic-1.jpg",
+      image: "/Templates/template-1/thumbnail.png",
     },
     {
       id: 2,
@@ -378,9 +403,8 @@ document.addEventListener("DOMContentLoaded", function () {
         const templateId = card.dataset.id;
         addToRecentTemplates(templateId);
 
-        // Here you would typically redirect to template editor
-        alert(`Template ${templateId} selected! Redirecting to editor...`);
-        // window.location.href = `/HTML/Editor.html?template=${templateId}`;
+        // Redirect to editor with template ID in URL query param
+        window.location.href = `/HTML/Editor.html?template=${templateId}`;
       });
     });
   }

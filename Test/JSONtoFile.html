@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Fabric.js JSON to Canvas Live Editor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f7f7f7;
+      }
+      .container {
+        display: flex;
+        height: 100vh;
+      }
+      .json-panel {
+        flex: 1;
+        padding: 32px 24px 24px 32px;
+        background: #222;
+        color: #eee;
+        font-size: 15px;
+        overflow: auto;
+        min-width: 350px;
+        display: flex;
+        flex-direction: column;
+      }
+      .editor-panel {
+        flex: 1;
+        padding: 32px 32px 24px 24px;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        min-width: 400px;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.03);
+        align-items: flex-start;
+      }
+      #canvas-container {
+        border: 1px solid #ddd;
+        background: #fafafa;
+        width: 600px;
+        height: 350px;
+        margin-bottom: 18px;
+      }
+      #json-input {
+        background: #222;
+        color: #eee;
+        border: none;
+        width: 100%;
+        height: 100%;
+        font-family: monospace;
+        font-size: 15px;
+        resize: none;
+        padding: 16px;
+        box-sizing: border-box;
+      }
+      .error-msg {
+        color: #ff6b6b;
+        font-size: 14px;
+        margin: 4px 0 0 0;
+        min-height: 18px;
+      }
+      @media (max-width: 900px) {
+        .container {
+          flex-direction: column;
+        }
+        .editor-panel,
+        .json-panel {
+          min-width: 0;
+          width: 100%;
+        }
+        #canvas-container {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Left: JSON Input -->
+      <div class="json-panel">
+        <h2>Paste/Edit Fabric JSON</h2>
+        <textarea id="json-input" spellcheck="false"></textarea>
+        <div class="error-msg" id="json-error"></div>
+      </div>
+      <!-- Right: Canvas -->
+      <div class="editor-panel">
+        <h2>Canvas Preview</h2>
+        <div id="canvas-container">
+          <canvas id="c" width="600" height="350"></canvas>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Initialize canvas
+      const canvas = new fabric.Canvas("c", { selection: false });
+
+      // Default JSON (for demonstration)
+      const defaultJSON = {
+        version: "5.3.0",
+        objects: [
+          {
+            type: "i-text",
+            version: "5.3.0",
+            left: 120,
+            top: 120,
+            width: 250,
+            height: 45,
+            fill: "#2d2dff",
+            fontSize: 36,
+            fontFamily: "Georgia",
+            fontWeight: "bold",
+            text: "Paste JSON here!",
+          },
+        ],
+      };
+
+      // Set default JSON in textarea
+      const jsonInput = document.getElementById("json-input");
+      const jsonError = document.getElementById("json-error");
+      jsonInput.value = JSON.stringify(defaultJSON, null, 2);
+
+      // Function to load JSON into canvas
+      function loadJSONToCanvas(jsonStr) {
+        try {
+          const json = JSON.parse(jsonStr);
+          canvas.loadFromJSON(json, () => {
+            canvas.renderAll();
+          });
+          jsonError.textContent = "";
+        } catch (e) {
+          jsonError.textContent = "Invalid JSON: " + e.message;
+        }
+      }
+
+      // Listen for changes in JSON input and update canvas
+      jsonInput.addEventListener("input", function () {
+        loadJSONToCanvas(this.value);
+      });
+
+      // Initial load
+      loadJSONToCanvas(jsonInput.value);
+
+      // Optional: Update JSON textarea if canvas is changed by code (not required for your use-case)
+      // But if you want two-way sync, you can add:
+      // canvas.on('object:modified', updateJSONTextarea);
+      // function updateJSONTextarea() {
+      //   jsonInput.value = JSON.stringify(canvas.toJSON(), null, 2);
+      // }
+    </script>
+  </body>
+</html>
